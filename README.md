@@ -19,7 +19,10 @@ create_tables.sql - SQL code for creating tables in Redshift
 Before running the DAG in the Airflow UI, tables need to be created in Redshift.  Create a Redshift instance and run the create_tables.sql code in Redshift's query editor first before running the DAG.
 
 ## Using Airflow UI
-Start up the Airflow webserver using your local Airflow installation.  The airflow DAG can be turned on and then triggered to start running tasks.  Monitoring and debugging can be performed when zooming into a specific DAG.
+Airflow can be run locally on a webserver if using a local Airflow installation.  Type into the terminal the command:
+airflow webserver
+Copy into your web browser of choice the localhost and port used by Airflow to access the webserver
+In the webserver, the airflow DAG can be turned on and then triggered to start running tasks.  Monitoring and debugging can be performed when zooming into a specific DAG.
 
 ### Prerequisites
 If you are on linux, you probably already have python installed
@@ -28,3 +31,6 @@ python --version
 
 Otherwise, python can be installed for ubuntu or debian linux using the command:
 sudo apt-get install python
+
+Airflow can also be installed locally:
+https://airflow.apache.org/docs/apache-airflow/stable/installation/index.html
