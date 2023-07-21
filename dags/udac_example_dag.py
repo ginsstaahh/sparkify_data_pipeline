@@ -17,7 +17,8 @@ default_args = {
     'depends_on_past': False,
     'retries': 3,
     'retry_delay': datetime.timedelta(minutes=5),
-    'catchup': False
+    'catchup': False,
+    'email_on_failure': False
 }
 
 dag = DAG('udac_example_dag',
