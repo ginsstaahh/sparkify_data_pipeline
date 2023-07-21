@@ -1,7 +1,7 @@
 # Intro
 This project contains an Apache Airflow data pipeline used for transferring data from S3 buckets to a Redshift data warehouse.  The intent of this project is to demonstrate the superb ability to control the process of data transfer by using a data pipeline with Airflow being sufficient for backfilling (transferring data from earlier date times) and monitoring.  The data pipeline consists of a DAG (directed acyclic graph) which puts tasks in sequence so that work is performed smoothly and synchronously.  This project is part of Udacity's Data Engineering Nanodegree where Udacity's sparkify music streaming app stores user data in a data warehouse for analytics.
 
-## Folders and Files 
+## Folders and Files
 Dags:
 	udac_example_dag.py - Airflow DAG consisting of all pipeline tasks and task dependencies
 Plugins:
@@ -16,7 +16,7 @@ Plugins:
 create_tables.sql - SQL code for creating tables in Redshift
 
 ## Set Up Procedures
-Before running the DAG in the Airflow UI, tables need to be created in Redshift.  Run the create_tables.sql code in Redshift's query editor first before running the DAG.
+Before running the DAG in the Airflow UI, tables need to be created in Redshift.  Create a Redshift instance and run the create_tables.sql code in Redshift's query editor first before running the DAG.
 
 ## Using Airflow UI
 Start up the Airflow webserver using your local Airflow installation.  The airflow DAG can be turned on and then triggered to start running tasks.  Monitoring and debugging can be performed when zooming into a specific DAG.
