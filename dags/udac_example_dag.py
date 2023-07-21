@@ -14,6 +14,10 @@ default_args = {
     'start_date': datetime(2018, 11, 1),
     'end_date': datetime(2018, 11, 30),
     'provide_context': True,
+    'depends_on_past': False,
+    'retries': 3,
+    'retry_delay': datetime.timedelta(minutes=5),
+    'catchup': False
 }
 
 dag = DAG('udac_example_dag',

@@ -32,5 +32,5 @@ python --version
 Otherwise, python can be installed for ubuntu or debian linux using the command:
 sudo apt-get install python
 
-Airflow can also be installed locally:
+Airflow can also be installed locally using pip:
 https://airflow.apache.org/docs/apache-airflow/stable/installation/index.html
