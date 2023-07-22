@@ -16,7 +16,7 @@ default_args = {
     'provide_context': True,
     'depends_on_past': False,
     'retries': 3,
-    'retry_delay': datetime.timedelta(minutes=5),
+    'retry_delay': timedelta(minutes=5),
     'catchup': False,
     'email_on_failure': False
 }
@@ -97,7 +97,7 @@ run_quality_checks = DataQualityOperator(
     redshift_conn_id='redshift'
 )
 
-# end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)
+end_operator = DummyOperator(task_id='Stop_execution',  dag=dag)
 
 start_operator >> [stage_events_to_redshift, stage_songs_to_redshift]
 stage_events_to_redshift >> load_songplays_table
@@ -108,4 +108,4 @@ load_user_dimension_table >> run_quality_checks
 load_song_dimension_table >> run_quality_checks
 load_artist_dimension_table >> run_quality_checks
 load_time_dimension_table >> run_quality_checks
-# run_quality_checks >> end_operator
+run_quality_checks >> end_operator

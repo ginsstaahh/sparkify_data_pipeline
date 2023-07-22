@@ -34,7 +34,7 @@ class DataQualityOperator(BaseOperator):
             {None}
         """
         redshift_hook = PostgresHook(self.redshift_conn_id)
-        self.log.info(f'context type: {type(context)} )
+        self.log.info(f'context type: {type(context)}')
        
         self.log.info('Checking number of records in tables')
         for table in self.tables:
@@ -44,4 +44,4 @@ class DataQualityOperator(BaseOperator):
             num_records = records[0][0]
             if num_records < 1:
                 raise ValueError(f"Data quality check failed. {table} contained 0 rows")
-            logging.info(f"Data quality on table {table} check passed with {records[0][0]} records")
+            self.log.info(f"Data quality on table {table} check passed with {records[0][0]} records")
