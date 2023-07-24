@@ -26,11 +26,11 @@ class StageToRedshiftOperator(BaseOperator):
         
         Args:
             redshift_conn_id {string} - id used to connect to redshift
-            aws_credentials_id {string} - 
+            aws_credentials_id {string} - security credentials id to verify permission access
             table {string} - table to stage values into
-            s3_bucket {string} - 
-            s3_key {string} - 
-            json_format {} - 
+            s3_bucket {string} - directory for where objects are stored in S3
+            s3_key {string} - distinctive identifier for an object stored in S3
+            json_format {string} - option to define JSON scheme
         """
         
         super(StageToRedshiftOperator, self).__init__(*args, **kwargs)
@@ -42,7 +42,13 @@ class StageToRedshiftOperator(BaseOperator):
         self.json_format = json_format
 
     def execute(self, context):
-        """Procedures that are executed when Operator task runs"""
+        """Procedures that are executed when Operator task runs
+        
+        Args:
+            context {dict} - information about the running DAG and its Airflow environment
+        Returns:
+            {None}
+        """
         aws_hook = AwsHook(self.aws_credentials_id)
         credentials = aws_hook.get_credentials()
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)

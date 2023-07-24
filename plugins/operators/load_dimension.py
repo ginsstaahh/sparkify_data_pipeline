@@ -13,29 +13,38 @@ class LoadDimensionOperator(BaseOperator):
 
     @apply_defaults
     def __init__(self, destination_table="", redshift_conn_id="", 
-                 sql="", *args, **kwargs):
+                 sql="", truncate=False, *args, **kwargs):
         """Constructor used to set default values for LoadDimensionOperator instances.
         
         Args:
             destination_table {string} - table to insert values into
             redshift_conn_id {string} - id used to connect to redshift
+            sql {string} - SQL code to execute insertion
+            truncate {bool} - option to truncate existing data before insertion
         """
         
         super(LoadDimensionOperator, self).__init__(*args, **kwargs)
         self.destination_table = destination_table
         self.redshift_conn_id = redshift_conn_id
         self.sql = sql
+        self.truncate = truncate
 
     def execute(self, context):
         """Procedures that are executed when Operator task runs
+        
         Args:
-            context {} - 
+            context {dict} - information about the running DAG and its Airflow environment
         Returns:
             {None}
         """
         redshift = PostgresHook(postgres_conn_id=self.redshift_conn_id)
+        if self.truncate:
+            self.log.info(f"truncating existing data in {self.destination_table}")
+            redshift.run(f"""
+                DELETE FROM {self.destination_table};
+            """)
         
-        self.log.info("Loading dimensions table")
+        self.log.info(f"Loading {self.destination_table} dimension table")
         formatted_sql = f"""
             INSERT INTO {self.destination_table}
             ({self.sql});

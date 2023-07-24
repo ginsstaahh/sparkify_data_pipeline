@@ -28,8 +28,9 @@ class LoadFactOperator(BaseOperator):
 
     def execute(self, context):
         """Procedures that are executed when Operator task runs
+        
         Args:
-            context {} - 
+            context {dict} - information about the running DAG and its Airflow environment
         Returns:
             {None}
         """

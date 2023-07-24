@@ -29,12 +29,11 @@ class DataQualityOperator(BaseOperator):
         """Procedures that are executed when Operator task runs
         
         Args:
-            context {} - 
+            context {dict} - information about the running DAG and its Airflow environment
         Returns:
             {None}
         """
         redshift_hook = PostgresHook(self.redshift_conn_id)
-        self.log.info(f'context type: {type(context)}')
        
         self.log.info('Checking number of records in tables')
         for table in self.tables:
